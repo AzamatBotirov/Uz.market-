@@ -40,8 +40,11 @@ public class MarketBaseService {
         return null;
     }
 
-    public List<MarketBase> saveList(List<MarketBase> marketBase) {
-        List<MarketBase> marketBaseList = marketBaseRepository.saveAll(marketBase);
+    public List<MarketBase> saveList(List<MarketBase> marketBases) {
+        for (MarketBase marketBase : marketBases) {
+            marketBase.setCreateDate(ZonedDateTime.now());
+        }
+        List<MarketBase> marketBaseList = marketBaseRepository.saveAll(marketBases);
         return marketBaseList;
     }
 
